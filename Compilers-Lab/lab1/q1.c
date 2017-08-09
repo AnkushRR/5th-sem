@@ -23,6 +23,7 @@ int main(void){
 	int token_no=0;//also lexeme_index and also index for struct array
 	int state=0;
 	int increment_no;
+	char buff[10];
 	while(*front_pointer!='\n'){
 		state=1;
 		increment_no=0;
@@ -86,7 +87,6 @@ int main(void){
 				memcpy(s_table[token_no-1].lexeme_name,&front_pointer[0],increment_no);
 				s_table[token_no-1].lexeme_name[increment_no] = '\0';
 				strcpy(s_table[token_no-1].lexeme_type,"identifier");
-				char buff[10];
 				snprintf(buff, sizeof buff,"<id,%d> ",token_no);
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
@@ -126,7 +126,15 @@ int main(void){
 				}//end of if else of state 5 case
 				break;//case 6 break statement
 				case 7:
-
+				token_no++;
+				s_table[token_no-1].lexeme_index=token_no;
+				memcpy(s_table[token_no-1].lexeme_name,&front_pointer[0],increment_no);
+				s_table[token_no-1].lexeme_name[increment_no] = '\0';
+				strcpy(s_table[token_no-1].lexeme_type,"number");
+				snprintf(buff, sizeof buff,"<num,%d> ",token_no);
+				strcat(output_string,buff);
+				front_pointer=back_pointer;
+				state =13;
 				break;//case 7 break statement
 			}//end of state switch statement
 			if(state==13){
