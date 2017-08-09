@@ -6,18 +6,23 @@
 
 #include <stdio.h>
 #include <string.h>
+
 int main(void){
+
 	struct symbol_table{
 		int lexeme_index;
 		char lexeme_name[30];
 		char lexeme_type[15];
 	};
 	struct symbol_table s_table[30];
+
 	char input_string[150];
 	char output_string[150]="";
+	//take input from user using fgets which does not give out warning
 	printf("Please enter the string without spaces :\n");
 	fgets(input_string,sizeof(input_string),stdin);
 	// gets(input_string);
+
 	char *front_pointer=input_string;
 	char *back_pointer=input_string;
 	char scanning_char;
@@ -27,14 +32,18 @@ int main(void){
 	char buff[30];
 	int flag;
 	int dont_add;
+
 	while(*front_pointer!='\n'){
 		state=1;
 		increment_no=0;
 		flag=0;
 		dont_add=0;
+
 		while(*back_pointer){
 			scanning_char=*back_pointer;
+
 			switch(state){
+
 				case 1:
 				if((scanning_char>='a' && scanning_char<='z') || (scanning_char>='A' && scanning_char<='Z')){
 					state=2;
@@ -77,6 +86,7 @@ int main(void){
 					}//end of scanning character switch statement
 				}//end of if else of state 1 case
 				break;//case 1 break statement
+
 				case 2:
 				if((scanning_char>='a' && scanning_char<='z') || (scanning_char>='A' && scanning_char<='Z') || (scanning_char>='0' && scanning_char<'9') || scanning_char=='_'){
 					state=2;
@@ -86,6 +96,7 @@ int main(void){
 					state=3;
 				}//end of if else of state 2 case
 				break;//case 2 break statement
+
 				case 3:
 				token_no++;
 				memcpy(buff,&front_pointer[0],increment_no);
@@ -109,6 +120,7 @@ int main(void){
 				front_pointer=back_pointer;
 				flag=1;
 				break;//case 3 break statement
+
 				case 4:
 				if(scanning_char>='0' && scanning_char<'9'){
 					state=4;
@@ -118,21 +130,23 @@ int main(void){
 					state=5;
 					increment_no++;
 					*back_pointer++;
-				}else{
+				}else{//needs to be a floating pointer number
 					printf("Wrong Input Character\n");
 					return 0;
 				}//end of if else of state 4 case
 				break;//case 4 break statement
+
 				case 5:
 				if(scanning_char>='0' && scanning_char<'9'){
 					state=6;
 					increment_no++;
 					*back_pointer++;
-				}else{
+				}else{//needs to be a digit after '.' to be a floating point number
 					printf("Wrong Input Character\n");
 					return 0;
 				}//end of if else of state 5 case
 				break;//case 5 break statement
+
 				case 6:
 				if(scanning_char>='0' && scanning_char<'9'){
 					state=6;
@@ -142,6 +156,7 @@ int main(void){
 					state=7;
 				}//end of if else of state 5 case
 				break;//case 6 break statement
+
 				case 7:
 				token_no++;
 				memcpy(buff,&front_pointer[0],increment_no);
@@ -165,30 +180,35 @@ int main(void){
 				front_pointer=back_pointer;
 				flag=1;
 				break;//case 7 break statement
+
 				case 8:
 				snprintf(buff, sizeof buff,"<+> ");
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
 				flag=1;
 				break;//case 8 break statement
+
 				case 9:
 				snprintf(buff, sizeof buff,"<-> ");
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
 				flag=1;
 				break;//case 9 break statement
+
 				case 10:
 				snprintf(buff, sizeof buff,"<*> ");
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
 				flag=1;
 				break;//case 10 break statement
+
 				case 11:
 				snprintf(buff, sizeof buff,"</> ");
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
 				flag=1;
 				break;//case 11 break statement
+
 				case 12:
 				snprintf(buff, sizeof buff,"<=> ");
 				strcat(output_string,buff);
@@ -196,11 +216,16 @@ int main(void){
 				flag=1;
 				break;//case 12 break statement
 			}//end of state switch statement
+
 			if(flag==1){
 				break;//breaks the inner while loop
 			}
+
 		}//end of back poiner or inner while loop
+
 	}//end of front poiter or outer loop
+
+	//output to the user
 	printf("\nToken Stream :\n");
 	printf("%s\n",output_string);
 	printf("\nSymbol Table :\n");
