@@ -1,8 +1,10 @@
 /*
 * Author : SaiKumar Immadi
-* Lexical Parser Program
-* 5th Semester Compilers Lab 1
+* Lexical Parser Program for  Compilers Lab 1
+* 5th Semester @ IIIT Guwahati
 */
+
+/* You can use this code for free. Just don't plagiarise it for your lab assignments */
 
 #include <stdio.h>
 #include <string.h>
