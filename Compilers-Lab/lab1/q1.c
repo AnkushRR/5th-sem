@@ -136,6 +136,12 @@ int main(void){
 				front_pointer=back_pointer;
 				state =13;
 				break;//case 7 break statement
+				case 8:
+				snprintf(buff, sizeof buff,"<+> ");
+				strcat(output_string,buff);
+				front_pointer=back_pointer;
+				state =13;
+				break;//case 8 break statement
 			}//end of state switch statement
 			if(state==13){
 				break;
