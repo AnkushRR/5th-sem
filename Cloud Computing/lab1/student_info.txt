@@ -1,0 +1,19 @@
+Student Id : CS34569 | Student Name : Mike Ross
+MA301 : Mathematics 3
+HS301 : English 3
+CS301 : Algorithms 2
+CS320 : Compilers
+
+
+Student Id : CS34568 | Student Name : Hannah Baker
+MA301 : Mathematics 3
+HS301 : English 3
+CS301 : Algorithms 2
+
+
+Student Id : EC14574 | Student Name : Ted Mosby
+MA101 : Mathematics 1
+EC101 : Digital Design
+EC102 : Electrical Circuit Ananlysis
+
+
