@@ -3,6 +3,7 @@
 * Lexical Parser Program
 * 5th Semester Compilers Lab 1
 */
+
 #include <stdio.h>
 #include <string.h>
 int main(void){
@@ -14,7 +15,7 @@ int main(void){
 	struct symbol_table s_table[30];
 	char input_string[150];
 	char output_string[150]="";
-	printf("Please enter your string\n");
+	printf("Please enter the string without spaces :\n");
 	fgets(input_string,sizeof(input_string),stdin);
 	// gets(input_string);
 	char *front_pointer=input_string;
@@ -196,14 +197,16 @@ int main(void){
 				break;//case 12 break statement
 			}//end of state switch statement
 			if(flag==1){
-				break;
+				break;//breaks the inner while loop
 			}
 		}//end of back poiner or inner while loop
 	}//end of front poiter or outer loop
-
+	printf("\nToken Stream :\n");
 	printf("%s\n",output_string);
-	for(int index=0;index<token_no;index++){
-		printf("%d %s %s\n",s_table[index].lexeme_index,s_table[index].lexeme_name,s_table[index].lexeme_type);
+	printf("\nSymbol Table :\n");
+	for(int index=0;index<token_no;index++){//token_no came from the above while loop
+		printf("%d  %s  %s\n",s_table[index].lexeme_index,s_table[index].lexeme_name,s_table[index].lexeme_type);
 	}
+	printf("\n");
 	return 0;
 }
