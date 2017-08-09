@@ -23,10 +23,14 @@ int main(void){
 	int token_no=0;//also lexeme_index and also index for struct array
 	int state=0;
 	int increment_no;
-	char buff[10];
+	char buff[30];
+	int flag;
+	int dont_add;
 	while(*front_pointer!='\n'){
 		state=1;
 		increment_no=0;
+		flag=0;
+		dont_add=0;
 		while(*back_pointer){
 			scanning_char=*back_pointer;
 			switch(state){
@@ -83,14 +87,26 @@ int main(void){
 				break;//case 2 break statement
 				case 3:
 				token_no++;
-				s_table[token_no-1].lexeme_index=token_no;
-				memcpy(s_table[token_no-1].lexeme_name,&front_pointer[0],increment_no);
-				s_table[token_no-1].lexeme_name[increment_no] = '\0';
-				strcpy(s_table[token_no-1].lexeme_type,"identifier");
+				memcpy(buff,&front_pointer[0],increment_no);
+				buff[increment_no]='\0';
+				for(int index=0;index<token_no;index++){
+					if(strcmp(buff,s_table[index].lexeme_name)==0){
+						dont_add=1;
+						break;
+					}
+				}
+				if(dont_add==0){
+					s_table[token_no-1].lexeme_index=token_no;
+					memcpy(s_table[token_no-1].lexeme_name,&front_pointer[0],increment_no);
+					s_table[token_no-1].lexeme_name[increment_no] = '\0';
+					strcpy(s_table[token_no-1].lexeme_type,"identifier");
+				}else if(dont_add==1){
+					token_no--;
+				}
 				snprintf(buff, sizeof buff,"<id,%d> ",token_no);
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
-				state =13;
+				flag=1;
 				break;//case 3 break statement
 				case 4:
 				if(scanning_char>='0' && scanning_char<'9'){
@@ -127,31 +143,66 @@ int main(void){
 				break;//case 6 break statement
 				case 7:
 				token_no++;
-				s_table[token_no-1].lexeme_index=token_no;
-				memcpy(s_table[token_no-1].lexeme_name,&front_pointer[0],increment_no);
-				s_table[token_no-1].lexeme_name[increment_no] = '\0';
-				strcpy(s_table[token_no-1].lexeme_type,"number");
+				memcpy(buff,&front_pointer[0],increment_no);
+				buff[increment_no]='\0';
+				for(int index=0;index<token_no;index++){
+					if(strcmp(buff,s_table[index].lexeme_name)==0){
+						dont_add=1;
+						break;
+					}
+				}
+				if(dont_add==0){
+					s_table[token_no-1].lexeme_index=token_no;
+					memcpy(s_table[token_no-1].lexeme_name,&front_pointer[0],increment_no);
+					s_table[token_no-1].lexeme_name[increment_no] = '\0';
+					strcpy(s_table[token_no-1].lexeme_type,"number");
+				}else if(dont_add==1){
+					token_no--;
+				}
 				snprintf(buff, sizeof buff,"<num,%d> ",token_no);
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
-				state =13;
+				flag=1;
 				break;//case 7 break statement
 				case 8:
 				snprintf(buff, sizeof buff,"<+> ");
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
-				state =13;
+				flag=1;
 				break;//case 8 break statement
+				case 9:
+				snprintf(buff, sizeof buff,"<-> ");
+				strcat(output_string,buff);
+				front_pointer=back_pointer;
+				flag=1;
+				break;//case 9 break statement
+				case 10:
+				snprintf(buff, sizeof buff,"<*> ");
+				strcat(output_string,buff);
+				front_pointer=back_pointer;
+				flag=1;
+				break;//case 10 break statement
+				case 11:
+				snprintf(buff, sizeof buff,"</> ");
+				strcat(output_string,buff);
+				front_pointer=back_pointer;
+				flag=1;
+				break;//case 11 break statement
+				case 12:
+				snprintf(buff, sizeof buff,"<=> ");
+				strcat(output_string,buff);
+				front_pointer=back_pointer;
+				flag=1;
+				break;//case 12 break statement
 			}//end of state switch statement
-			if(state==13){
+			if(flag==1){
 				break;
 			}
 		}//end of back poiner or inner while loop
 	}//end of front poiter or outer loop
 
 	printf("%s\n",output_string);
-	int index;
-	for(index=0;index<token_no;index++){
+	for(int index=0;index<token_no;index++){
 		printf("%d %s %s\n",s_table[index].lexeme_index,s_table[index].lexeme_name,s_table[index].lexeme_type);
 	}
 	return 0;
