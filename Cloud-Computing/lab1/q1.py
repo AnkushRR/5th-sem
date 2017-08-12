@@ -1,3 +1,10 @@
+'''
+Author: SaiKumar Immadi
+5th Semester @ IIIT Guwahati
+'''
+
+# You can use this code for free. Just don't plagiarise it for your lab assignments
+
 #name, roll no, current semester in one list 
 students_info=[("Hannah Baker","CS34568",5),("Mike Ross","CS34569",5),("Cersei Lannister","EC34570",5),("Alex Dunphy","EC24571",3),("Clay Jensen","CS24572",3),("Dev Shah","CS14573",1),("Ted Mosby","EC14574",1),("Monica Geller","CS44575",7),("Ross Geller","EC44576",7)]
 courses_info=[("MA101","Mathematics 1"),("CS101","Computer Programming"),("EC101","Digital Design"),("CS110","Computer Programming Lab"),("EC102","Electrical Circuit Ananlysis"),("HS101","English 1"),("HS201","English 2"),("HS301","English 3"),("HS401","English 4"),("MA201","Mathematics 2"),("MA301","Mathematics 3"),("MA401","Mathematics 4"),("CS201","Algorithms 1"),("CS231","Operating Systems"),("CS301","Algorithms 2"),("CS401","Algorithms 3"),("CS320","Compilers"),("CS440","Image Processing"),("EC201","Analog Circuits 1"),("EC301","Analog Circuits 2"),("EC401","Analog Circuits 3"),("EC380","Control Systems"),("EC462","Advanced Semiconductor Devices")]

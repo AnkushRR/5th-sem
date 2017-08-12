@@ -1,3 +1,11 @@
+'''
+Author: SaiKumar Immadi
+Sentiment Extractor in Python for Cloud Computing Lab 2
+5th Semester @ IIIT Guwahati
+'''
+
+# You can use this code for free. Just don't plagiarise it for your lab assignments
+
 import sys
 import ast
 SentimentLexiconFile=open("SentimentLexicon.txt","r")

@@ -1,3 +1,10 @@
+'''
+Author: SaiKumar Immadi
+5th Semester @ IIIT Guwahati
+'''
+
+# You can use this code for free. Just don't plagiarise it for your lab assignments
+
 def readFile(filename):
 	words=[]
 	for lineInFile in filename:
