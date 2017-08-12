@@ -34,12 +34,15 @@ int main(void){
 	char buff[30];
 	int flag;
 	int dont_add;
+	int temp_token=0;
 
 	while(*front_pointer!='\n'){
 		state=1;
 		increment_no=0;
 		flag=0;
 		dont_add=0;
+		temp_token=0;
+
 
 		while(*back_pointer){
 			scanning_char=*back_pointer;
@@ -105,6 +108,7 @@ int main(void){
 				buff[increment_no]='\0';
 				for(int index=0;index<token_no;index++){
 					if(strcmp(buff,s_table[index].lexeme_name)==0){
+						temp_token=s_table[index].lexeme_index;
 						dont_add=1;
 						break;
 					}
@@ -117,7 +121,11 @@ int main(void){
 				}else if(dont_add==1){
 					token_no--;
 				}
-				snprintf(buff, sizeof buff,"<id,%d> ",token_no);
+				if(dont_add==0){
+					snprintf(buff, sizeof buff,"<id,%d> ",token_no);
+				}else if(dont_add==1){
+					snprintf(buff, sizeof buff,"<id,%d> ",temp_token);
+				}
 				strcat(output_string,buff);
 				front_pointer=back_pointer;
 				flag=1;
@@ -220,6 +228,7 @@ int main(void){
 			}//end of state switch statement
 
 			if(flag==1){
+
 				break;//breaks the inner while loop
 			}
 
@@ -232,7 +241,7 @@ int main(void){
 	printf("%s\n",output_string);
 	printf("\nSymbol Table :\n");
 	for(int index=0;index<token_no;index++){//token_no came from the above while loop
-		printf("%d  %s  %s\n",s_table[index].lexeme_index,s_table[index].lexeme_name,s_table[index].lexeme_type);
+		printf("%d  %s %s\n",s_table[index].lexeme_index,s_table[index].lexeme_name,s_table[index].lexeme_type);
 	}
 	printf("\n");
 	return 0;
