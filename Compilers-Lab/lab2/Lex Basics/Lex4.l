@@ -10,7 +10,8 @@ letter [A-Za-z]
 {letter}({letter}|{digit})*  {count++;}
 {digit}{digit}*[.]{digit}{digit}* {printf("float\n");digit++;}
 {digit}{digit}* {printf("int\n");digit++;}
-\n   {line_counter++;}
+[+\-*^?/={}();\[\]] {printf("<%s> ",yytext);}
+[\n\t' ']   {line_counter++;}
 . {return 1;}
 %%
 int main(void) {

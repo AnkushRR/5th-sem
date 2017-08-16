@@ -1,4 +1,11 @@
-rate afh if afsda
-if afaa afh rate
- afmaagf
-\
+rate=position*item+19.7;
+if(rate>=50) {
+item=item+4;
+}
+if(rate<=50) {
+item=item+4;
+}
+rate=position*item+19.7;
+rate=position*item+19.7;
+pos=3*rate;
+item=item+4;
