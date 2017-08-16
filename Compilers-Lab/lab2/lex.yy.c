@@ -375,8 +375,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 6
-#define YY_END_OF_BUFFER 7
+#define YY_NUM_RULES 5
+#define YY_END_OF_BUFFER 6
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -384,26 +384,26 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[14] =
+static yyconst flex_int16_t yy_accept[12] =
     {   0,
-        0,    0,    7,    5,    4,    3,    1,    0,    3,    1,
-        2,    2,    0
+        0,    0,    6,    4,    3,    3,    2,    2,    2,    1,
+        0
     } ;
 
 static yyconst YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
+        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    3,    1,    4,    4,    4,
+        1,    2,    1,    1,    1,    1,    1,    1,    2,    1,
+        1,    1,    1,    1,    1,    1,    1,    4,    4,    4,
         4,    4,    4,    4,    4,    4,    4,    1,    1,    1,
         1,    1,    1,    1,    5,    5,    5,    5,    5,    5,
         5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
         5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
-        1,    1,    1,    1,    1,    1,    5,    5,    5,    5,
+        1,    1,    1,    1,    6,    1,    5,    5,    5,    5,
 
-        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    7,    5,    5,    8,    5,    5,    5,    5,    5,
         5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
         5,    5,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -422,33 +422,33 @@ static yyconst YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst YY_CHAR yy_meta[6] =
+static yyconst YY_CHAR yy_meta[9] =
     {   0,
-        1,    1,    1,    2,    1
+        1,    1,    1,    2,    2,    2,    2,    2
     } ;
 
-static yyconst flex_uint16_t yy_base[16] =
+static yyconst flex_uint16_t yy_base[13] =
     {   0,
-        0,    0,   12,   13,   13,    3,    4,    0,    0,    0,
-        0,    0,   13,    9,    8
+        0,    0,   11,   12,   12,   12,    0,    3,    0,    0,
+       12,    7
     } ;
 
-static yyconst flex_int16_t yy_def[16] =
+static yyconst flex_int16_t yy_def[13] =
     {   0,
-       13,    1,   13,   13,   13,   13,   13,   14,    6,    7,
-       15,   15,    0,   13,   13
+       11,    1,   11,   11,   11,   11,   12,   12,   12,   12,
+        0,   11
     } ;
 
-static yyconst flex_uint16_t yy_nxt[19] =
+static yyconst flex_uint16_t yy_nxt[21] =
     {   0,
-        4,    5,    4,    6,    7,    8,    9,   10,   10,   12,
-       11,   13,    3,   13,   13,   13,   13,   13
+        4,    5,    6,    4,    7,    7,    7,    8,    9,   10,
+       11,    3,   11,   11,   11,   11,   11,   11,   11,   11
     } ;
 
-static yyconst flex_int16_t yy_chk[19] =
+static yyconst flex_int16_t yy_chk[21] =
     {   0,
-        1,    1,    1,    1,    1,    6,    6,    7,    7,   15,
-       14,    3,   13,   13,   13,   13,   13,   13
+        1,    1,    1,    1,    1,    1,    1,    1,   12,    8,
+        3,   11,   11,   11,   11,   11,   11,   11,   11,   11
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -465,10 +465,25 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "Lex4.l"
-#line 4 "Lex4.l"
-    int count,digit,line_counter;
-#line 472 "lex.yy.c"
+#line 1 "lex_parser.l"
+/*
+* Author : SaiKumar Immadi
+* Lexical Parser Program made using Lex for  Compilers Lab 2
+* 5th Semester @ IIIT Guwahati
+*/
+/* You can use this code for free. Just don't plagiarize it for your lab assignments */
+#line 12 "lex_parser.l"
+
+struct symbol_table{
+int lexeme_index;
+char lexeme_name[30];
+char lexeme_type[15];
+};
+struct symbol_table s_table[50];
+char output_stream[100][10];
+int s_index;
+int output_index;
+#line 487 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -686,10 +701,11 @@ YY_DECL
 		}
 
 	{
-#line 7 "Lex4.l"
+#line 24 "lex_parser.l"
 
-    /* match identifier */
-#line 693 "lex.yy.c"
+
+
+#line 709 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -716,13 +732,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 14 )
+				if ( yy_current_state >= 12 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 13 );
+		while ( yy_base[yy_current_state] != 12 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -747,41 +763,67 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case YY_STATE_EOF(INITIAL):
-#line 9 "Lex4.l"
-{return 0;}
+#line 27 "lex_parser.l"
+{
+return 0;
+}
 	YY_BREAK
 case 1:
 YY_RULE_SETUP
-#line 10 "Lex4.l"
-{count++;}
+#line 31 "lex_parser.l"
+{
+strcpy(output_stream[output_index],"<if>");
+output_index++;
+}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "Lex4.l"
-{printf("float\n");digit++;}
+#line 36 "lex_parser.l"
+{
+int dont_add=0;
+int index;
+for(index=0;index<s_index;index++){
+  if(strcmp(s_table[index].lexeme_name,yytext)==0){
+    dont_add=1;
+    break;
+  }
+}
+if(dont_add==0){
+  s_table[s_index].lexeme_index=s_index+1;
+  strcpy(s_table[s_index].lexeme_name,yytext);
+  strcpy(s_table[s_index].lexeme_type,"identifier");
+  snprintf(output_stream[output_index],sizeof output_stream[output_index],"<id,%d>",s_table[s_index].lexeme_index);
+  s_index++;
+  output_index++;
+}else if(dont_add==1){
+  snprintf(output_stream[output_index],sizeof output_stream[output_index],"<id,%d>",s_table[index].lexeme_index);
+  output_index++;
+}
+}
 	YY_BREAK
 case 3:
+/* rule 3 can match eol */
 YY_RULE_SETUP
-#line 12 "Lex4.l"
-{printf("int\n");digit++;}
+#line 57 "lex_parser.l"
+{
+  /* ignore all next line and white space and tab characters */
+}
 	YY_BREAK
 case 4:
-/* rule 4 can match eol */
 YY_RULE_SETUP
-#line 13 "Lex4.l"
-{line_counter++;}
+#line 60 "lex_parser.l"
+{
+  /* any character that did not match the above rules */
+  /* exits the program */
+  return 1;
+}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 14 "Lex4.l"
-{return 1;}
-	YY_BREAK
-case 6:
-YY_RULE_SETUP
-#line 15 "Lex4.l"
+#line 65 "lex_parser.l"
 ECHO;
 	YY_BREAK
-#line 785 "lex.yy.c"
+#line 827 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1072,7 +1114,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 14 )
+			if ( yy_current_state >= 12 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1100,11 +1142,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 14 )
+		if ( yy_current_state >= 12 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 13);
+	yy_is_jam = (yy_current_state == 11);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1780,16 +1822,35 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 15 "Lex4.l"
+#line 65 "lex_parser.l"
 
 
-int main(void) {
-    yyin=fopen("input.txt", "r");
-    if(yylex()==0){
-    printf("number of identifiers = %d, numbers=%d and Line counters=%d \n", count, digit, line_counter);
+
+int main(void){
+  s_index=0;
+  output_index=0;
+  s_table[s_index].lexeme_index=s_index+1;
+  strcpy(s_table[s_index].lexeme_name,"if");
+  strcpy(s_table[s_index].lexeme_type,"keyword");
+  s_index++;
+  yyin=fopen("lex_parser_input.txt","r");
+  if(yylex()==0){
+    printf("Token Stream :\n");
+    for(int index=0;index<output_index;index++){
+      if(index==0){
+        printf("%s",output_stream[index]);
+      }else{
+        printf(", %s",output_stream[index]);
+      }
+    }
+    printf("\n\nSymbol Table :\n");
+    for(int index=0;index<s_index;index++){
+      printf("%d %s %s\n",s_table[index].lexeme_index,s_table[index].lexeme_name,s_table[index].lexeme_type);
+    }
+    printf("\n");
     return 0;
   }else{
-    printf("wrong character\n");
+    printf("\nWrong input character\n\n");
     return 0;
   }
 }

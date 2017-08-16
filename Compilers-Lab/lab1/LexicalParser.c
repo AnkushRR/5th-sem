@@ -4,7 +4,7 @@
 * 5th Semester @ IIIT Guwahati
 */
 
-/* You can use this code for free. Just don't plagiarise it for your lab assignments */
+/* You can use this code for free. Just don't plagiarize it for your lab assignments */
 
 #include <stdio.h>
 #include <string.h>
