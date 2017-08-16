@@ -1,0 +1,7 @@
+This is
+a file
+and 
+nothing 
+esle
+1
+exit

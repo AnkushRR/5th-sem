@@ -1,0 +1,9 @@
+
+Install Lex:
+   sudo apt-get install flex
+
+Install Yacc:
+
+   sudo apt-get install bison
+
+http://techapple.net/2014/10/install-lex-yacc-ubuntu-linuxmint-easily-works-versions/
