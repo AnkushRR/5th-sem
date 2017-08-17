@@ -1,8 +1,8 @@
 rate=position*item+19.7;
-if(rate>=50) {
+if(rate>50) {
 item=item+4;
 }
-if(rate<=50) {
+if(rate<50) {
 item=item+4;
 }
 rate=position*item+19.7;
