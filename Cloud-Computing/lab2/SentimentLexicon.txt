@@ -1609,6 +1609,7 @@ noisy	-1
 nonsense	-2
 noob	-2
 nosey	-2
+not	-5
 not good	-2
 not working	-3
 notorious	-2
