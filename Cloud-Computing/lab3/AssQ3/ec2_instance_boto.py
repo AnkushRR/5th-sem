@@ -17,7 +17,8 @@ sudo apt-get update
 sudo apt-get install python-pip -y
 pip install boto
 echo "import boto" > download_html.py
-echo "s3=boto.connect_s3(aws_access_key_id='AKIAJDQEQ3F2AJWT6YEQ',aws_secret_access_key='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')" >> download_html.py
+# **need to create a IAM user and insert his credentials below. give him only permissions for read only s3 access**
+echo "s3=boto.connect_s3(aws_access_key_id='<give_read_access_s3_user>',aws_secret_access_key='give_read_access_s3_user')" >> download_html.py
 echo "bucket=s3.get_bucket('happytravellerlab3bucket')" >> download_html.py
 echo "key1=bucket.get_key('files/first.html')" >> download_html.py
 echo "key2=bucket.get_key('files/second.html')" >> download_html.py
