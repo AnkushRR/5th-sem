@@ -1,0 +1,3 @@
+A->Bm|Cx
+B->C|yAy
+C->B|w|z
