@@ -1,3 +1,5 @@
-A->A|a
-S->BC|ad|e
-E->LM
+S->TE
+E->+TE|0
+T->FA
+A->*FA|0
+F->(E)|x
