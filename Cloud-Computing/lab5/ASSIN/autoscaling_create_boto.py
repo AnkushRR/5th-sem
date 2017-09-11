@@ -6,6 +6,9 @@ Creating an Autoscaling Group and specifying scale up and scale down policies an
 
 # You can use this code for free. Just don't plagiarise it for your lab assignments
 
+# don't run this file just after running autoscale remove file
+# wait for 3-4 mins or you will find yourself in an infinite loop
+
 import boto.ec2
 import boto.ec2.autoscale
 from boto.ec2.autoscale import LaunchConfiguration
@@ -21,7 +24,7 @@ sudo apt-get install python-pip -y
 pip install boto
 echo "import boto" > download_html.py
 # **need to create a IAM user and insert his credentials below. give him only permissions for read only s3 access**
-echo "s3=boto.connect_s3(aws_access_key_id='AKIAJZPUBKMH6FY5VZZQ',aws_secret_access_key='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')" >> download_html.py
+echo "s3=boto.connect_s3(aws_access_key_id='<s3_readonly_user>',aws_secret_access_key='<s3_readonly_user>')" >> download_html.py
 echo "bucket=s3.get_bucket('happytravellerlab3bucket')" >> download_html.py
 echo "key1=bucket.get_key('files/first.html')" >> download_html.py
 echo "key2=bucket.get_key('files/second.html')" >> download_html.py
@@ -76,7 +79,7 @@ instances = ec2.get_only_instances(instance_ids)
 for instance in instances:
 	while instance.state != u'running':
 		print "Initialising Instances. Please wait!"
-		sleep(3)
+		sleep(6)
 		instance.update()
 
 print ""
