@@ -1,3 +1,11 @@
+'''
+Author: SaiKumar Immadi
+Health statuses of EC2 instances using Boto
+5th Semester @ IIIT Guwahati
+'''
+
+# You can use this code for free. Just don't plagiarise it for your lab assignments
+
 import boto.ec2
 from time import sleep
 conn = boto.ec2.connect_to_region("us-east-1")
