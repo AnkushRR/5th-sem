@@ -1,0 +1,9 @@
+printf (“The value of %d %d”, &a, &b);
+printf (“The value of %d %d”, &a, b);
+printfx (“The value of %d %d”, &a, &b);
+printf (“The value of %d %d”, &a, &b)
+printf (“The value of %d %d”; &a, &b);
+printf (“The value of %d d”, &a, &b);
+printf (“The value of %d %d”, &a, &b, &c);
+printf (“The value of %d %d %d”, &a, &b);
+printf (“The value of %d %d %d”, &a, &b, &b, &c);
