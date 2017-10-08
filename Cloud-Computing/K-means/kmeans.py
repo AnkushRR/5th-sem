@@ -19,13 +19,21 @@ def main(argv):
 	for line in file:
 		lineStripped=line.strip().split('\t')
 		mainList.append((float(lineStripped[0]),float(lineStripped[1])))
+	file.close()
 	oldKlists=[]
 	klists=[]
 	kmeans=[]
 	oldKmeans=[]
-#intialising methods
-#make one method active and comment out remaining
-#1st method
+
+# intialising methods
+
+# donot comment
+	for i in range(0,k):
+		klists.append([])
+
+# make one method active and comment out remaining
+
+# 1st method
 	# tempMainMeanFindingList=list(mainList)
 	# for i in range(0,k):
 	# 	rand=randint(0,len(tempMainMeanFindingList))
@@ -33,24 +41,21 @@ def main(argv):
 	# 	kmeans.append(randPoint)
 	# 	tempMainMeanFindingList[:] = (value for value in tempMainMeanFindingList if value != randPoint)
 
-#should be there
-	for i in range(0,k):
-		klists.append([])
+# 2nd method
 	tempK=0
-
-#2nd method
 	for i in range(0,len(mainList)):
 		klists[tempK%k].append(mainList[i])
 		tempK+=1;
 	kmeans=calculateKmeans()
 
-#3rd method
+# 3rd method
+	# tempK=0
 	# for i in range(0,len(mainList)):
 	# 	klists[tempK%k].append(mainList[i])
 	# 	tempK+=2;
 	# kmeans=calculateKmeans()
 
-#4th method
+# 4th method
 	# tempListSize=len(mainList)/k
 	# for i in range(0,k-1):
 	# 	klists[i]=mainList[(i)*tempListSize:(i+1)*tempListSize]
@@ -58,9 +63,8 @@ def main(argv):
 	# kmeans=calculateKmeans()
 
 	iterations=0
-	maxIterations=100000
+	maxIterations=100000 #cannot run while loop more than this
 	while((cmp(oldKmeans,kmeans)!=0 or cmp(oldKlists,klists)!=0) and iterations<maxIterations):
-		print len(klists[0]),len(klists[1]),len(klists[2])
 		flag=0
 		oldKmeans=list(kmeans)
 		oldKlists=list(klists)
@@ -75,16 +79,33 @@ def main(argv):
 				break
 		if(flag==1):
 			break
-		#calculating centroids of clusters
+		#calculating means of clusters
 		kmeans=[]
 		kmeans=calculateKmeans()
 
 		iterations+=1
 
+
+	outputFile=open("output.txt","w")
+	outputFile.write("No of iterations are %.d\n" % iterations)
+	outputFile.write("The K-means are :\n")
+	outputFile.write(str(kmeans))
+	outputFile.write("\n\n\n")
+	outputFile.write("The cluster sets are :\n")
+	for i in range(0,k):
+		outputFile.write("Cluster %.d :\n" % (i+1))
+		outputFile.write(str(klists[i]))
+		outputFile.write("\n\n\n")
+	outputFile.write("\n\n")
+	outputFile.write("The Main Input data is :\n")
+	outputFile.write(str(mainList))
+	outputFile.write("\n")
+	outputFile.close()
+
 	print "The K-means are"
 	for i in range(0,k):
 		print "( %.4f," % kmeans[i][0], "%.4f" % kmeans[i][1],")"
-	print iterations
+	print "Check output.txt file for further information"
 	return 0
 
 
@@ -101,6 +122,7 @@ def calculateKmeans():
 			ytotal+=klists[i][j][1]
 		kmeans.append((xtotal/(len(klists[i])),ytotal/(len(klists[i]))))
 	return kmeans
+
 def calculateKlists():
 	#Empty klists set of sets is passed to this function
 	#klists is [[],[],[]] for k=3
@@ -118,7 +140,6 @@ def calculateKlists():
 			dist = sqrt((x2 - x1)**2 + (y2 - y1)**2)
 			tempList.append(dist)
 		klists[tempList.index(min(tempList))].append(tempPoint)
-		# print str(tempList)
 	return klists
 
 
