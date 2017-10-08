@@ -1,0 +1,27 @@
+%{
+    #include <iostream>
+    int yylex();
+    void yyerror(const char*);
+%}
+
+
+%union
+{
+    char    name[100];
+    int     val;
+}
+
+%token NUM ID
+%right '='
+%left '+' '-'
+%left '*'
+
+%%
+
+exp :   NUM     {$$.val = $1.val;}
+    | ID        {$$.val = vars[$1.name];}
+    | exp '+' exp   {$$.val = $1.val + $3.val;}
+    | ID '=' exp    {$$.val = vars[$1.name] = $3.val;}
+;
+
+%%
