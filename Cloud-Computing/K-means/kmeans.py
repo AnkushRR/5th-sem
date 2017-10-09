@@ -1,7 +1,16 @@
 #!/bin/usr/python
+'''
+Author: SaiKumar Immadi
+Basic K-Means clustering algorithm written in python
+5th Semester @ IIIT Guwahati
+'''
+
+# You can use this code for free. Just don't plagiarise it for your lab assignments
+
 import sys
 from math import sqrt
 from random import randint
+import matplotlib.pyplot as plt
 
 def main(argv):
 	global mainList,klists,kmeans
@@ -36,17 +45,17 @@ def main(argv):
 # 1st method
 	# tempMainMeanFindingList=list(mainList)
 	# for i in range(0,k):
-	# 	rand=randint(0,len(tempMainMeanFindingList))
+	# 	rand=randint(0,(len(tempMainMeanFindingList)-1))
 	# 	randPoint=tempMainMeanFindingList[rand]
 	# 	kmeans.append(randPoint)
 	# 	tempMainMeanFindingList[:] = (value for value in tempMainMeanFindingList if value != randPoint)
 
 # 2nd method
-	tempK=0
-	for i in range(0,len(mainList)):
-		klists[tempK%k].append(mainList[i])
-		tempK+=1;
-	kmeans=calculateKmeans()
+	# tempK=0
+	# for i in range(0,len(mainList)):
+	# 	klists[tempK%k].append(mainList[i])
+	# 	tempK+=1;
+	# kmeans=calculateKmeans()
 
 # 3rd method
 	# tempK=0
@@ -56,11 +65,13 @@ def main(argv):
 	# kmeans=calculateKmeans()
 
 # 4th method
-	# tempListSize=len(mainList)/k
-	# for i in range(0,k-1):
-	# 	klists[i]=mainList[(i)*tempListSize:(i+1)*tempListSize]
-	# klists[k-1]=mainList[(k-1)*tempListSize:]
-	# kmeans=calculateKmeans()
+	tempListSize=len(mainList)/k
+	for i in range(0,k-1):
+		klists[i]=mainList[(i)*tempListSize:(i+1)*tempListSize]
+	klists[k-1]=mainList[(k-1)*tempListSize:]
+	kmeans=calculateKmeans()
+
+#end
 
 	iterations=0
 	maxIterations=100000 #cannot run while loop more than this
@@ -85,6 +96,8 @@ def main(argv):
 
 		iterations+=1
 
+	kmeans=oldKmeans
+	klists=oldKlists
 
 	outputFile=open("output.txt","w")
 	outputFile.write("No of iterations are %.d\n" % iterations)
@@ -101,11 +114,33 @@ def main(argv):
 	outputFile.write(str(mainList))
 	outputFile.write("\n")
 	outputFile.close()
-
+	x_mean_coordinates=[]
+	y_mean_coordinates=[]
+	fig=plt.figure()
+	for i in range(0,k):
+		x_coordinates=[]
+		y_coordinates=[]
+		x_mean_coordinates.append(kmeans[i][0])
+		y_mean_coordinates.append(kmeans[i][1])
+		for j in range(0,len(klists[i])):
+			x_coordinates.append(klists[i][j][0])
+			y_coordinates.append(klists[i][j][1])
+		label_name="Cluster : %.d" % (i+1)
+		plt.scatter(x_coordinates,y_coordinates,s=5,label=label_name)
+	plt.scatter(x_mean_coordinates,y_mean_coordinates,marker='*',color='#000000',s=30,label='K-Means')
 	print "The K-means are"
 	for i in range(0,k):
 		print "( %.4f," % kmeans[i][0], "%.4f" % kmeans[i][1],")"
 	print "Check output.txt file for further information"
+	print "Saved a copy of the figure in local machine"
+	plt.title('K-Means Clustering')
+	plt.xlabel('x-axis')
+	plt.ylabel('y-axis')
+	# plt.xlim(0,250)
+	# plt.ylim(0,250)
+	plt.legend()
+	fig.savefig('output.jpg')
+	plt.show()
 	return 0
 
 
@@ -141,7 +176,6 @@ def calculateKlists():
 			tempList.append(dist)
 		klists[tempList.index(min(tempList))].append(tempPoint)
 	return klists
-
 
 if __name__ == "__main__":
    main(sys.argv[1:])
