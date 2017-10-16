@@ -1,3 +1,12 @@
+#!/bin/usr/python
+'''
+Author: SaiKumar Immadi
+Basic DBSCAN clustering algorithm written in python
+5th Semester @ IIIT Guwahati
+'''
+
+# You can use this code for free. Just don't plagiarise it for your lab assignments
+
 import sys
 from math import sqrt
 from random import randint
@@ -25,8 +34,8 @@ def main(argv):
     file.close()
     while(len(mainList)>0):
         point=mainList.pop(0)
-        mainEneigh=calcEneigh(point,1)
-        outEneigh=calcEneigh(point,2)
+        mainEneigh=calcEneigh(point,1,[])
+        outEneigh=calcEneigh(point,2,[])
         if(len(mainEneigh+outEneigh)>=minPts):
             cluster=calcCluster(point)
             clusters.append(cluster)
@@ -58,12 +67,14 @@ def main(argv):
     plt.show()
     return 0
 
-def calcEneigh(p,opt):
+def calcEneigh(p,opt,optList):
     global e,mainList,minPts,clusters,outliers
     if(opt==1):
         list=mainList
     elif(opt==2):
         list=outliers
+    elif(opt==3):
+    	list=optList
     eneigh=[]
     for point in list:
         x1=p[0]
@@ -82,14 +93,15 @@ def calcCluster(p):
     tempList.append(p)
     while(len(tempList)>0):
         point=tempList.pop(0)
-        mainEneigh=calcEneigh(point,1)
-        outEneigh=calcEneigh(point,2)
+        mainEneigh=calcEneigh(point,1,[])
+        outEneigh=calcEneigh(point,2,[])
+        clusterEneigh=calcEneigh(point,3,cluster+tempList)
         cluster.append(point)
         for x in mainEneigh:
             mainList.remove(x)
         for x in outEneigh:
             outliers.remove(x)
-        if(len(mainEneigh+outEneigh)>=minPts):
+        if(len(mainEneigh+outEneigh+clusterEneigh)>=minPts):
             tempList=tempList+mainEneigh+outEneigh
         else:
             cluster=cluster+mainEneigh+outEneigh
